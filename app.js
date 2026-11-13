@@ -201,16 +201,18 @@ todoList.addEventListener("keydown", (event) => {
 // ============================================
 // STEP 4 — filters, stats, clear completed
 // ============================================
-function filterTodos(filter) {
-  currentFilter = filter;
-
+function updateFilterButtons() {
   filters.forEach(btn => {
-    const isActive = btn.dataset.filter === filter;
+    const isActive = btn.dataset.filter === currentFilter;
     btn.classList.toggle("active", isActive);
     btn.setAttribute("aria-pressed", String(isActive));
   });
+}
 
-  render();
+function filterTodos(filter) {
+  currentFilter = filter;
+  updateFilterButtons();
+  commit();
 }
 
 filters.forEach(btn => {
@@ -220,11 +222,11 @@ filters.forEach(btn => {
 function clearCompleted() {
   todos = todos.filter(t => !t.completed);
   if (!todos.some(t => t.id === editingId)) editingId = null;
-  render();
+  commit();
 }
 
 clearCompletedBtn.addEventListener("click", clearCompleted);
 
 // ✅ Commit:  git commit -m "Add: filters, stats and clear completed"
-
-commit();
+updateFilterButtons();
+render();
