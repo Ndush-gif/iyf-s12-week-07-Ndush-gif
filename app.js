@@ -100,8 +100,8 @@ function commit() {
 // STEP 2 — add a task
 // ============================================
 function addTodo(text) {
-  todos.push({ id: nextId++, text, completed: false });
-  render();
+  todos.push({ id: Date.now(), text, completed: false });
+  commit();
 }
 
 form.addEventListener("submit", (event) => {
