@@ -104,15 +104,38 @@ function render() {
         })
     );
 
-    cartList.replaceChildren(
+        cartList.replaceChildren(
         ...state.cart.map((item) => {
             const product = state.products.find((p) => p.id === item.productId);
             const li = document.createElement("li");
-            li.textContent = `${product.name} x ${item.quantity} = ${formatPrice(product.price * item.quantity)}`;
+
+            const label = document.createElement("span");
+            label.textContent = `${product.name} x ${item.quantity} = ${formatPrice(product.price * item.quantity)} `;
+
+            const minus = document.createElement("button");
+            minus.type = "button";
+            minus.dataset.action = "decrease";
+            minus.dataset.id = product.id;
+            minus.textContent = "-";
+            minus.setAttribute("aria-label", `Decrease ${product.name}`);
+
+            const plus = document.createElement("button");
+            plus.type = "button";
+            plus.dataset.action = "increase";
+            plus.dataset.id = product.id;
+            plus.textContent = "+";
+            plus.setAttribute("aria-label", `Increase ${product.name}`);
+
+            const remove = document.createElement("button");
+            remove.type = "button";
+            remove.dataset.action = "remove";
+            remove.dataset.id = product.id;
+            remove.textContent = "Remove";
+
+            li.append(label, minus, plus, remove);
             return li;
         })
     );
-
     cartCountEl.textContent = getCartCount();
     cartTotalEl.textContent = formatPrice(getCartTotal());
 }
