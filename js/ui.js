@@ -19,6 +19,7 @@ function createTodoElement(todo, editingId) {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.className = "toggle";
+    checkbox.setAttribute("aria-label", `Mark "${todo.text}" as done`);
     checkbox.checked = todo.completed;
 
     if (editingId === todo.id) {
