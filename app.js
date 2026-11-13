@@ -3,6 +3,23 @@
 // THE RULE: the array is the truth, the page is a picture of it.
 //   Every action = (1) change `todos`  (2) call render()
 // ============================================
+// ---------- Storage ----------
+const TODOS_KEY = "todos";
+const FILTER_KEY = "filter";
+
+function saveToStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function getFromStorage(key, defaultValue = null) {
+  const data = localStorage.getItem(key);
+  if (data === null) return defaultValue;
+  try {
+    return JSON.parse(data);
+  } catch {
+    return defaultValue;
+  }
+}
 
 // ---------- DOM elements ----------
 const form = document.getElementById("todo-form");
