@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 2: Recent Searches</title>
+</head>
+<body>
+    <main>
+        <h1>Recent Searches</h1>
+        <form id="search-form">
+            <label for="search-input">Search</label>
+            <input type="text" id="search-input" autocomplete="off" required>
+            <button type="submit">Search</button>
+        </form>
+        <p id="result"></p>
+        <h2>Recent</h2>
+        <ul id="history-list"></ul>
+    </main>
+    <script>
+        const RECENT_KEY = "recentSearches";
+        const MAX_RECENT = 5;
+
+        const form = document.getElementById("search-form");
+        const input = document.getElementById("search-input");
+        const result = document.getElementById("result");
+        const historyList = document.getElementById("history-list");
+
+        function loadRecent() {
+            try {
+                return JSON.parse(localStorage.getItem(RECENT_KEY)) || [];
+            } catch {
+                return [];
+            }
+        }
+
+        let recent = loadRecent();
+
+        function renderHistory() {
+            historyList.replaceChildren(...recent.map((term) => {
+                const li = document.createElement("li");
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "history-item";
+                button.textContent = term;
+                li.appendChild(button);
+                return li;
+            }));
+        }
+
+        function search(term) {
+            result.textContent = `Searching for: ${term}`;
+            recent = recent.filter((t) => t.toLowerCase() !== term.toLowerCase());
+            recent.unshift(term);
+            recent = recent.slice(0, MAX_RECENT);
+            localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
+            renderHistory();
+        }
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const term = input.value.trim();
+            if (term === "") return;
+            search(term);
+            input.value = "";
+        });
+
+        historyList.addEventListener("click", (event) => {
+            const button = event.target.closest(".history-item");
+            if (button) search(button.textContent);
+        });
+
+        renderHistory();
+    </script>
+</body>
+</html>
