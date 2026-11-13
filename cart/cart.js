@@ -7,7 +7,7 @@ function saveToStorage(key, data) {
 
 function getFromStorage(key, defaultValue = null) {
     const data = localStorage.getItem(key);
-    if (data === null) return defaultValue;
+    if (data === null) {return defaultValue;}
     try {
         return JSON.parse(data);
     } catch {
@@ -104,7 +104,7 @@ function render() {
         })
     );
 
-        cartList.replaceChildren(
+    cartList.replaceChildren(
         ...state.cart.map((item) => {
             const product = state.products.find((p) => p.id === item.productId);
             const li = document.createElement("li");
@@ -142,18 +142,18 @@ function render() {
 
 // ---------- events: ONE listener for all Add buttons ----------
 productList.addEventListener("click", (event) => {
-    if (!event.target.matches(".add")) return;
+    if (!event.target.matches(".add")) {return;}
     addToCart(Number(event.target.dataset.id)); // dataset is a string!
 });
 
 // ONE listener for all the +, - and Remove buttons
 cartList.addEventListener("click", (event) => {
     const button = event.target.closest("button");
-    if (!button) return;
+    if (!button) {return;}
 
     const productId = Number(button.dataset.id); // dataset is a string!
     const item = state.cart.find((cartItem) => cartItem.productId === productId);
-    if (!item) return;
+    if (!item) {return;}
 
     if (button.dataset.action === "increase") {
         updateQuantity(productId, item.quantity + 1);
