@@ -225,6 +225,7 @@ function clearCompleted() {
   commit();
 }
 
+
 clearCompletedBtn.addEventListener("click", clearCompleted);
 
 // ✅ Commit:  git commit -m "Add: filters, stats and clear completed"
