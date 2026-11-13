@@ -31,9 +31,8 @@ const filters = document.querySelectorAll(".filter");
 const clearCompletedBtn = document.getElementById("clear-completed");
 
 // ---------- State ----------
-let todos = [];
-let currentFilter = "all";
-let nextId = 1;
+let todos = getFromStorage(TODOS_KEY, []);
+let currentFilter = getFromStorage(FILTER_KEY, "all");
 let editingId = null;
 let pendingTextClick = null;
 
