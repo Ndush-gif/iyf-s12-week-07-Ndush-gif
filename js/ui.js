@@ -14,7 +14,7 @@ function createTodoElement(todo, editingId) {
     const li = document.createElement("li");
     li.className = "todo-item";
     li.dataset.id = todo.id;
-    if (todo.completed) li.classList.add("completed");
+    if (todo.completed) {li.classList.add("completed");}
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";

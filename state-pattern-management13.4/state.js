@@ -72,7 +72,7 @@ function render(state) {
     document.body.style.color = state.theme === "dark" ? "#fff" : "#000";
 
     const visible = state.todos.filter((todo) => {
-        if (state.filter === "done") return todo.completed;
+        if (state.filter === "done") {return todo.completed;}
         return true;
     });
 

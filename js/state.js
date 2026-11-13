@@ -42,7 +42,7 @@ export function toggleTodo(id) {
 
 export function deleteTodo(id) {
     state.todos = logic.deleteTodo(state.todos, id);
-    if (state.editingId === id) state.editingId = null;
+    if (state.editingId === id) {state.editingId = null;}
     commit();
 }
 
@@ -61,7 +61,7 @@ export function clearCompleted() {
 }
 
 export function setFilter(filter) {
-    if (!VALID_FILTERS.includes(filter)) return;
+    if (!VALID_FILTERS.includes(filter)) {return;}
     state.filter = filter;
     commit();
 }

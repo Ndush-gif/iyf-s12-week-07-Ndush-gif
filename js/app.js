@@ -37,7 +37,7 @@ form.addEventListener("submit", (event) => {
 // ---------- toggle and delete: ONE delegated listener ----------
 todoList.addEventListener("click", (event) => {
     const item = event.target.closest(".todo-item");
-    if (!item) return;
+    if (!item) {return;}
 
     const id = Number(item.dataset.id); // dataset is a string!
 
@@ -45,7 +45,7 @@ todoList.addEventListener("click", (event) => {
         deleteTodo(id);
         return;
     }
-    if (event.target.closest(".edit")) return;
+    if (event.target.closest(".edit")) {return;}
 
     if (event.target.closest(".todo-text")) {
         window.clearTimeout(pendingTextClick);
@@ -62,7 +62,7 @@ todoList.addEventListener("click", (event) => {
 // ---------- double-click to edit ----------
 todoList.addEventListener("dblclick", (event) => {
     const text = event.target.closest(".todo-text");
-    if (!text) return;
+    if (!text) {return;}
 
     window.clearTimeout(pendingTextClick);
     pendingTextClick = null;
@@ -71,7 +71,7 @@ todoList.addEventListener("dblclick", (event) => {
 
 // ---------- Enter saves, Escape cancels ----------
 todoList.addEventListener("keydown", (event) => {
-    if (!event.target.matches(".edit")) return;
+    if (!event.target.matches(".edit")) {return;}
 
     if (event.key === "Enter") {
         const id = Number(event.target.closest(".todo-item").dataset.id);

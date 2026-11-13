@@ -1,6 +1,6 @@
 export function addTodo(todos, text, id = Date.now()) {
     const trimmed = text.trim();
-    if (trimmed === "") return todos;
+    if (trimmed === "") {return todos;}
     return [...todos, { id, text: trimmed, completed: false }];
 }
 
@@ -14,7 +14,7 @@ export function deleteTodo(todos, id) {
 
 export function editTodo(todos, id, text) {
     const trimmed = text.trim();
-    if (trimmed === "") return todos;
+    if (trimmed === "") {return todos;}
     return todos.map((todo) => (todo.id === id ? { ...todo, text: trimmed } : todo));
 }
 
@@ -23,8 +23,8 @@ export function clearCompleted(todos) {
 }
 
 export function filterTodos(todos, filter) {
-    if (filter === "active") return todos.filter((todo) => !todo.completed);
-    if (filter === "completed") return todos.filter((todo) => todo.completed);
+    if (filter === "active") {return todos.filter((todo) => !todo.completed);}
+    if (filter === "completed") {return todos.filter((todo) => todo.completed);}
     return todos;
 }
 
