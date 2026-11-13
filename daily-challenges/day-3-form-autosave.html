@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3: Form Auto-Save</title>
+</head>
+<body>
+    <main>
+        <h1>Form Auto-Save</h1>
+        <form id="draft-form">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <p id="status" role="status"></p>
+    </main>
+    <script>
+        const DRAFT_KEY = "draft";
+        const SAVE_INTERVAL_MS = 5000;
+
+        const form = document.getElementById("draft-form");
+        const status = document.getElementById("status");
+
+        function readFields() {
+            return Object.fromEntries(new FormData(form).entries());
+        }
+
+        function restoreDraft() {
+            let saved = null;
+            try {
+                saved = JSON.parse(localStorage.getItem(DRAFT_KEY));
+            } catch {
+                saved = null;
+            }
+            if (!saved) return;
+            Object.entries(saved).forEach(([name, value]) => {
+                const field = form.elements[name];
+                if (field) field.value = value;
+            });
+            status.textContent = "Draft restored";
+        }
+
+        setInterval(() => {
+            localStorage.setItem(DRAFT_KEY, JSON.stringify(readFields()));
+            status.textContent = `Draft saved at ${new Date().toLocaleTimeString()}`;
+        }, SAVE_INTERVAL_MS);
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            localStorage.removeItem(DRAFT_KEY);
+            form.reset();
+            status.textContent = "Submitted, draft cleared";
+        });
+
+        restoreDraft();
+    </script>
+</body>
+</html>
