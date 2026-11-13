@@ -128,13 +128,13 @@ function toggleTodo(id) {
   const todo = todos.find(t => t.id === id);
   if (!todo) return;
   todo.completed = !todo.completed;
-  render();
+  commit();
 }
 
 function deleteTodo(id) {
   todos = todos.filter(t => t.id !== id);
   if (editingId === id) editingId = null;
-  render();
+  commit();
 }
 
 todoList.addEventListener("click", (event) => {
