@@ -90,6 +90,11 @@ function updateStats() {
   const left = todos.filter(t => !t.completed).length;
   itemsLeft.textContent = `${left} ${left === 1 ? "item" : "items"} left`;
 }
+function commit() {
+  saveToStorage(TODOS_KEY, todos);
+  saveToStorage(FILTER_KEY, currentFilter);
+  render();
+}
 
 // ============================================
 // STEP 2 — add a task
