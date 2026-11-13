@@ -1,0 +1,31 @@
+{
+  "name": "iyf-s12-week-07-ndush-gif",
+  "version": "1.0.0",
+  "description": "To-Do List with localStorage persistence, ES modules, ESLint and unit tests",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,html,css}\"",
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ndush-gif/iyf-s12-week-07-Ndush-gif.git"
+  },
+  "keywords": [],
+  "author": "Catherine Nduku",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Ndush-gif/iyf-s12-week-07-Ndush-gif/issues"
+  },
+  "homepage": "https://github.com/Ndush-gif/iyf-s12-week-07-Ndush-gif#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1",
+    "vitest": "^5.1.0"
+  }
+}

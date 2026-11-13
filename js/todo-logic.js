@@ -5,9 +5,7 @@ export function addTodo(todos, text, id = Date.now()) {
 }
 
 export function toggleTodo(todos, id) {
-    return todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
+    return todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo));
 }
 
 export function deleteTodo(todos, id) {

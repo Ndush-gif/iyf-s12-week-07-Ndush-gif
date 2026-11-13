@@ -104,7 +104,7 @@ function render() {
         })
     );
 
-        cartList.replaceChildren(
+    cartList.replaceChildren(
         ...state.cart.map((item) => {
             const product = state.products.find((p) => p.id === item.productId);
             const li = document.createElement("li");
