@@ -146,5 +146,25 @@ productList.addEventListener("click", (event) => {
     addToCart(Number(event.target.dataset.id)); // dataset is a string!
 });
 
+// ONE listener for all the +, - and Remove buttons
+cartList.addEventListener("click", (event) => {
+    const button = event.target.closest("button");
+    if (!button) return;
+
+    const productId = Number(button.dataset.id); // dataset is a string!
+    const item = state.cart.find((cartItem) => cartItem.productId === productId);
+    if (!item) return;
+
+    if (button.dataset.action === "increase") {
+        updateQuantity(productId, item.quantity + 1);
+    } else if (button.dataset.action === "decrease") {
+        updateQuantity(productId, item.quantity - 1);
+    } else if (button.dataset.action === "remove") {
+        removeFromCart(productId);
+    }
+});
+
+document.getElementById("clear-cart").addEventListener("click", clearCart);
+
 // ---------- start: draw what was loaded ----------
 render();
