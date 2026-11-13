@@ -189,7 +189,7 @@ todoList.addEventListener("keydown", (event) => {
     const todo = todos.find(t => t.id === id);
     if (todo && text !== "") todo.text = text;
     editingId = null;
-    render();
+    commit();
   } else if (event.key === "Escape") {
     editingId = null;
     render();
@@ -227,4 +227,4 @@ clearCompletedBtn.addEventListener("click", clearCompleted);
 
 // ✅ Commit:  git commit -m "Add: filters, stats and clear completed"
 
-render();
+commit();
